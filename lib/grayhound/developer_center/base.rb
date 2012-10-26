@@ -5,6 +5,8 @@ module Grayhound
 
 		@@agent = Mechanize.new
 		@@agent.pluggable_parser.default = Mechanize::File
+		@@agent.user_agent = Mechanize::AGENT_ALIASES['Mac Safari']
+	
 
 		def self.agent
 			@@agent

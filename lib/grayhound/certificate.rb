@@ -1,5 +1,5 @@
 module Grayhound
-	class Certificate
+	class Certificate < Grayhound::Base
 		attr_accessor :displayId, :type, :name, :exp_date, :profiles, :status, :download_url, :data
 		def to_json(*a)
 			{

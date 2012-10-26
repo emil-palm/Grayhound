@@ -1,5 +1,5 @@
 module Grayhound
-	class Device
+	class Device < Grayhound::Base
 		attr_accessor :udid, :name
 		def to_json(*a)
 			{

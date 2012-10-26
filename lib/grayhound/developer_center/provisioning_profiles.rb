@@ -5,7 +5,7 @@ module Grayhound
 		DISTRIBUTION_PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/viewDistributionProfiles.action"
 
 		class ProvisioningProfiles < Grayhound::DeveloperCenter::Base
-
+			include Enumerable
 			module Hook
 				def self.included(base)
 					base.send(:extend, ModuleMethods)
@@ -34,6 +34,10 @@ module Grayhound
 			end
 
 			attr_reader :development, :distribution
+
+			def each
+				(self.development + self.distribution).each { |pp| yield pp }
+			end
 
 			def development
 				unless @development

@@ -1,6 +1,9 @@
 module Grayhound
 	module DeveloperCenter
 		class Account
+			class AccountException < Exception
+			end
+
 			module ModuleHook
 				def self.included(base)
 					base.send(:extend, ModuleMethods)
@@ -46,6 +49,8 @@ module Grayhound
 				self.password = password
 				self.team_id = team[:team_id]
 				self.team_name = team[:team_name]
+
+				raise AccountException("invalid arguments") unless self.username and self.password and (self.team_id or self.team_name)
 			end
 
 			def login_state (page)
@@ -75,7 +80,7 @@ module Grayhound
 							team_option = team_list.options.first
 						end
 
-						team_option.select
+						team_option.select if team_option  
 					end
 
 					btn = form.button_with(:name => 'action:saveTeamSelection!save')
