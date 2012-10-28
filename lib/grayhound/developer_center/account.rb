@@ -11,8 +11,9 @@ module Grayhound
 
 
 				module ModuleMethods
+					@@account = nil
 					def account=(account)
-							@@account = account
+						@@account = account
 					end
 
 					def setup_account(username,password,team={})
