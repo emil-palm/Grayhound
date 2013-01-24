@@ -1,8 +1,8 @@
 module Grayhound
 	module DeveloperCenter
 
-		DEVELOPMENT_PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/index.action"
-		DISTRIBUTION_PROFILES_URL = "https://developer.apple.com/ios/manage/provisioningprofiles/viewDistributionProfiles.action"
+		DEVELOPMENT_PROFILES_URL = "https://developer.apple.com/ios/my/provision/index.action"
+		DISTRIBUTION_PROFILES_URL = "https://developer.apple.com/ios/my/provisioningprofiles/viewDistributionProfiles.action"
 
 		class ProvisioningProfiles < Grayhound::DeveloperCenter::Base
 			include Enumerable
@@ -93,11 +93,11 @@ module Grayhound
 			protected
 
 			def parse_profiles_page(page)
-				rows = page.parser.xpath('//fieldset[@id="fs-0"]/table/tbody/tr').each do |row|
+				rows = page.parser.xpath('//table/tbody/tr').each do |row|
 					p = Grayhound::ProvisioningProfile.new()
-					p.blob_id = row.at_xpath('td[@class="checkbox"]/input/@value').to_s
-					next if row.at_xpath('td[@class="profile"]/a/span').nil?
-					p.name = row.at_xpath('td[@class="profile"]/a/span').text.to_s
+					# p.blob_id = row.at_xpath('td[@class="checkbox"]/input/@value').to_s
+					next if row.at_xpath('td[@class="profile"]/a').nil?
+					p.name = row.at_xpath('td[@class="profile"]/a').text.to_s
 					p.appid = row.at_xpath('td[@class="appid"]/text()').to_s
 					p.xcode_status = row.at_xpath('td[@class="statusXcode"]').text.strip.split("\n")[0].to_s
 					p.download_url = row.at_xpath('td[@class="action"]/a/@href').to_s
