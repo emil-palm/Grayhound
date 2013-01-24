@@ -80,6 +80,7 @@ module Grayhound
 			end
 
 			def load_distribution_profiles
+				return []
 				self.load_page_or_login(Grayhound::DeveloperCenter::DISTRIBUTION_PROFILES_URL).tap do |page|
 					@distribution = [].tap do |array|
 						parse_profiles_page(page) do |p|
