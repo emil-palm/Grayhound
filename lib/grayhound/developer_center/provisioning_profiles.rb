@@ -2,7 +2,7 @@ module Grayhound
 	module DeveloperCenter
 
 		DEVELOPMENT_PROFILES_URL = "https://developer.apple.com/ios/my/provision/index.action"
-		DISTRIBUTION_PROFILES_URL = "https://developer.apple.com/ios/my/provisioningprofiles/viewDistributionProfiles.action"
+		DISTRIBUTION_PROFILES_URL = DEVELOPMENT_PROFILES_URL
 
 		class ProvisioningProfiles < Grayhound::DeveloperCenter::Base
 			include Enumerable
